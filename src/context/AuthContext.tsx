@@ -21,10 +21,12 @@ export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
    const [user, setUser] = useState<UserType | null>(null);
 
+   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/check-session`, {
+        const response = await fetch(`${BACKEND_URL}/api/auth/check-session`, {
           credentials: 'include',
         });
         const data = await response.json();
